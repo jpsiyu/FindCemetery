@@ -1,0 +1,5 @@
+<view class='container_main'>
+  <view class='cemetery' wx:for="{{cemetery}}" wx:key="index" style='height:{{gridHeight}}px'>
+    {{item.name}}
+  </view>
+</view>
