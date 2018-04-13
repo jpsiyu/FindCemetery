@@ -1,5 +1,6 @@
 // pages/main/main.js
 var util = require('../../utils/util.js')
+var app = getApp()
 
 Page({
 
@@ -23,18 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var cemetery = [
-      { id: 1001, name: 'Tom', addr: [30, 50] },
-      { id: 1002, name: 'Max', addr: [18, 32] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-    ]
 
-    this.setData({gridHeight: this.calGridWidth()})
-    this.setData({cemetery:cemetery})
   },
 
   calGridWidth: function(){
@@ -53,7 +43,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var cemetery = app.dataHolder.getCemetery()
+    this.setData({ gridHeight: this.calGridWidth() })
+    this.setData({ cemetery: cemetery })
   },
 
   /**

@@ -1,51 +1,45 @@
-var app = getApp()
-
-// pages/add/add.js
+// pages/map/map.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    longitue: null,
-    latitude: null,
-    addrName: null,
+    longitude: null,
+    latidude: null,
     name: null,
   },
 
-  chooseLocation: function () {
-    var fetch = this.data
-    var page = this
-
-    wx.chooseLocation({
-      
-      success: function (res) {
-        fetch.longitude = res.longitude
-        fetch.latitude = res.latitude
-        fetch.addrName = res.name
-        page.setData({
-          addrName: res.name
-        })
-      },
+  /**
+   * 获取位置
+   */
+  getLocation: function(){
+    this.mapCtx.getCenterLocation({
+      success: function(res){ console.log(res.longitude, res.latitude)}
     })
   },
 
   /**
-   * 表单提交
+   * 显示位置
    */
-  formSubmit: function(event){
-    var inputName = event.detail.value.inputName
-    console.log(typeof(inputName))
-    if (inputName == '')
-      inputName = "无名"
-    
-    app.dataHolder.addCemetery(
-      inputName, 
-      [this.data.longitude, this.data.latitude],
-      this.data.addrName,
-      )
-    wx.navigateBack({
-      delta: 1
+  showLocation: function(){
+    if (this.data.longitude == null)
+      console.log('no position')
+    else
+      wx.openLocation({
+        latitude: this.data.latitude,
+        longitude: this.data.longitude,
+      })
+  },
+
+  chooseLocation: function(){
+    fetch = this.data
+    wx.chooseLocation({
+      success: function(res) {
+        fetch.longitude = res.longitude
+        fetch.latitude = res.latitude
+        fetch.name = res.name
+      },
     })
   },
 
@@ -60,7 +54,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**

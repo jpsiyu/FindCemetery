@@ -15,7 +15,7 @@
 
 .input-name input{
   background-color: lightgray;
-
+  text-align: left;
 }
 
 

@@ -32,8 +32,12 @@ App({
         }
       }
     })
+    var DataHolder = require('./DataHolder.js')
+    this.dataHolder = new DataHolder()
+    this.dataHolder.initCemetery()
   },
   globalData: {
     userInfo: null
-  }
+  },
+  dataHolder: null
 })

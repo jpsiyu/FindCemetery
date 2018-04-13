@@ -4,8 +4,10 @@
   <form bindsubmit='formSubmit'>
     <view class='input-name'>
       <label>名字：</label>
-      <input name='inputName'></input>
+      <input name='inputName' required placeholder='姓名'/>
     </view>
+    <label>位置: {{addrName}}</label>
+    <button bindtap='chooseLocation'>获取位置</button>
     <button class='btn-submit' form-type='submit'>提交</button>
   </form>
 </view>
