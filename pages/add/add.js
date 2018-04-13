@@ -1,45 +1,25 @@
-// pages/main/main.js
-var util = require('../../utils/util.js')
-
+// pages/add/add.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+  
   },
 
   /**
-   * 添加按钮事件
+   * 表单提交
    */
-  btnAdd: function(event){
-    wx.navigateTo({
-      url: '../add/add',
-    })
+  formSubmit: function(event){
+    console.log(event.detail.value.inputName)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var cemetery = [
-      { id: 1001, name: 'Tom', addr: [30, 50] },
-      { id: 1002, name: 'Max', addr: [18, 32] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-      { id: 1003, name: 'Ryu', addr: [50, 72] },
-    ]
-
-    this.setData({gridHeight: this.calGridWidth()})
-    this.setData({cemetery:cemetery})
-  },
-
-  calGridWidth: function(){
-    var ww = util.getWindowWidth()
-    return ww * 0.49
+  
   },
 
   /**

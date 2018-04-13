@@ -1,5 +1,10 @@
-<view class='container_main'>
-  <view class='cemetery' wx:for="{{cemetery}}" wx:key="index" style='height:{{gridHeight}}px'>
-    {{item.name}}
+<view class='page'>
+  <view class='btn-container'>
+    <button class='btn' bindtap='btnAdd'>add</button>
+  </view>
+  <view class='cemetery-container'>
+    <view class='cemetery' wx:for="{{cemetery}}" wx:key="index" style='height:{{gridHeight}}px'>
+      {{item.name}}
+    </view>
   </view>
 </view>
