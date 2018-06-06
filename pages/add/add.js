@@ -35,18 +35,22 @@ Page({
    */
   formSubmit: function(event){
     var inputName = event.detail.value.inputName
-    console.log(typeof(inputName))
     if (inputName == '')
       inputName = "无名"
     
-    app.dataholder.addCemetery(
+    const successCallback = (stone) => {
+      console.log('add stone', stone)
+      app.dataholder.addCemetery(stone)
+      wx.navigateBack({delta: 1})
+    }
+
+    app.requestAddStone(
       inputName, 
+      90,
       [this.data.longitude, this.data.latitude],
       this.data.addrName,
-      )
-    wx.navigateBack({
-      delta: 1
-    })
+      successCallback,
+    )
   },
 
   /**

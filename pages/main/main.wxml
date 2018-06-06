@@ -2,8 +2,8 @@
   <view class='cemetery-container'>
     <view class='cemetery' wx:for="{{cemetery}}" wx:key="index" style='height:{{gridHeight}}px'>
       {{item.name}}
-      {{item.addrName}}
-      {{item.addr}}
+      {{item.locationName}}
+      {{item.location}}
     </view>
   </view>
 </view>

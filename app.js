@@ -31,14 +31,14 @@ App({
     const successCallback = (res) => {
       const serverMsg = res.data
       if(serverMsg.ok){
-        const openId = serverMsg.data.openid 
-        console.log(this)
-        this.authorize.setOpenId(openId)
+        const openid = serverMsg.data.openid 
+        this.authorize.setOpenId(openid)
+        this.requestStones()
       }
     }
 
     wx.request({
-      url: 'http://localhost/api/openId',
+      url: 'http://localhost/api/openid',
       data: {code},
       header: {
           'content-type': 'application/json'
@@ -61,15 +61,39 @@ App({
     })
   },
   
-  requestServer: function() {
+  requestStones: function() {
     wx.request({
       //url: 'http://203.195.207.74/api/stones',
       url: 'http://localhost/api/stones',
-      success: (res) => {console.log('success')},
-      fail: () => {console.log('err')},
-      complete: () => {console.log('compelte')}
+      data: {openid: this.authorize.openid},
+      success: (res) => {
+        const serverMsg = res.data
+        if(serverMsg.ok){
+          console.log('success', serverMsg.data.stones)
+          this.dataholder.initCemetery(serverMsg.data.stones)
+        }
+      },
+      fail: () => {console.log('err')}
     })
-  }
+  },
+
+  requestAddStone: function(name, age, location, locationName, callback){
+    const owner = this.authorize.openid
+    console.log('requestadd', owner,name,age)
+    wx.request({
+      url: 'http://localhost/api/stone',
+      data: {owner, name, age, location, locationName},
+      method: 'POST',
+      success: (res) => {
+        const serverMsg = res.data
+        if(serverMsg.ok){
+          console.log('success', serverMsg.data.stone)
+          callback(serverMsg.data.stone)
+        }
+      },
+      fail: () => {console.log('err')}
+    })
+  },
 })
 
 
