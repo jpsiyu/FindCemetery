@@ -43,7 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var cemetery = app.dataHolder.getCemetery()
+    var cemetery = app.dataholder.getCemetery()
     this.setData({ gridHeight: this.calGridWidth() })
     this.setData({ cemetery: cemetery })
   },

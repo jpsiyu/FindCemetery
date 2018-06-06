@@ -39,7 +39,7 @@ Page({
     if (inputName == '')
       inputName = "无名"
     
-    app.dataHolder.addCemetery(
+    app.dataholder.addCemetery(
       inputName, 
       [this.data.longitude, this.data.latitude],
       this.data.addrName,

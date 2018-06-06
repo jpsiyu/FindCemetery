@@ -1,13 +1,19 @@
 <!--pages/add/add.wxml-->
-<view class='page'>
-  <text>添加信息</text>
+<view class='jumbotron'>
+  <label> 添加信息</label>
   <form bindsubmit='formSubmit'>
-    <view class='input-name'>
+    <div class='form-group'>
       <label>名字：</label>
-      <input name='inputName' required placeholder='姓名'/>
-    </view>
-    <label>位置: {{addrName}}</label>
-    <button bindtap='chooseLocation'>获取位置</button>
-    <button class='btn-submit' form-type='submit'>提交</button>
+      <input type='text' class='form-control' name='inputName' required placeholder='姓名'/>
+    </div>
+
+    <div class='form-group'>
+      <label>位置: {{addrName}}</label>
+      <!--
+      <input type='button' class='form-control' name='location' />
+      -->
+      <button class='form-control btn-primary' bindtap='chooseLocation'>获取位置</button>
+    </div>
+    <button class='btn-primary' form-type='submit'>提交</button>
   </form>
 </view>

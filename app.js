@@ -1,5 +1,81 @@
-//app.js
+const Authorize = require('./utils/authorize.js')
+const Dataholder = require('./utils/dataholder.js')
+
 App({
+  userInfo: false,
+  dataholder: false,
+  authorize: false,
+
+  onLaunch: function() {
+    this.init()
+    this.userLogin()
+    this.getSetting()
+  },
+
+  init: function(){
+    this.authorize = new Authorize()
+    this.dataholder = new Dataholder()
+    this.dataholder.initCemetery()
+  },
+  
+  userLogin: function(){
+    wx.login({
+      success: res => {
+        console.log('userLogin', res)
+        this.requestOpenId(res.code)
+      }
+    })
+  },
+  
+  requestOpenId: function(code){
+    const successCallback = (res) => {
+      const serverMsg = res.data
+      if(serverMsg.ok){
+        const openId = serverMsg.data.openid 
+        console.log(this)
+        this.authorize.setOpenId(openId)
+      }
+    }
+
+    wx.request({
+      url: 'http://localhost/api/openId',
+      data: {code},
+      header: {
+          'content-type': 'application/json'
+      },
+      success: successCallback
+    })
+  },
+  
+  getSetting: function(){
+    wx.getSetting(res => {
+      console.log('userSetting', res)
+    })
+  },
+  
+  getUserInfo: function(){
+    wx.getUserInfo({
+      success: res => {
+        console.log('userInfo', res)
+      }
+    })
+  },
+  
+  requestServer: function() {
+    wx.request({
+      //url: 'http://203.195.207.74/api/stones',
+      url: 'http://localhost/api/stones',
+      success: (res) => {console.log('success')},
+      fail: () => {console.log('err')},
+      complete: () => {console.log('compelte')}
+    })
+  }
+})
+
+
+
+/*
+const appStructure = {
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -9,12 +85,14 @@ App({
     // 登录
     wx.login({
       success: res => {
+        console.log('login', res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log('getsetting', res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
@@ -29,15 +107,32 @@ App({
               }
             }
           })
+        }else{
+          //
         }
       }
     })
+
     var DataHolder = require('./DataHolder.js')
     this.dataHolder = new DataHolder()
     this.dataHolder.initCemetery()
   },
+
+  // app global variable
   globalData: {
     userInfo: null
   },
-  dataHolder: null
-})
+  userInfo: null,
+  dataHolder: null,
+
+  // 获取用户数据成功的毁掉函数
+  userInfoReadyCallback(){
+    console.log('userinfo:', this.globalData.userInfo)
+  },
+
+  // 请求获取用户数据
+  requestUserInfo(){
+
+  }
+}
+*/
