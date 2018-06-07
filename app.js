@@ -96,4 +96,21 @@ App({
       fail: () => {console.log('err')}
     })
   },
+
+  postDelStone: function(stoneid, callback){
+    const owner = this.authorize.openid
+    wx.request({
+      url: 'http://localhost/api/delete',
+      data: {owner, stoneid},
+      method: 'DELETE',
+      success: (res) => {
+        const serverMsg = res.data
+        if(serverMsg.ok){
+          console.log('delete success')
+          this.dataholder.deleteCemetery(stoneid)
+          callback()
+        }
+      }
+    })
+  }
 })

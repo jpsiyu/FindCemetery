@@ -24,6 +24,12 @@ Page({
   
   },
 
+  onBtnDel: function() {
+    app.postDelStone(this.data.itemid, () => {
+      wx.switchTab({url: '/pages/main/main'})
+    })
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
