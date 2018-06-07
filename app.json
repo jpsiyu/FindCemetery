@@ -2,9 +2,7 @@
   "pages":[
     "pages/main/main",
     "pages/add/add",
-    "pages/map/map",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/map/map"
   ],
   "window":{
     "backgroundTextStyle":"light",

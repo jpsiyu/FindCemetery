@@ -9,8 +9,21 @@
   </view>
 </view>
 -->
-<div class='container'>
-  <ul class="list-group">
-    <li class="list-group-item" wx:for="{{cemetery}}" wx:key="index">{{item.name}} </li>
-  </ul>
-</div>
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">前人居</view>
+    <view class="page__desc">前人居记载前人们的居住位置，小孝顺们再不不用担心找不到姥姥啦！</view>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <view class="kind-list">
+      <block wx:for="{{cemetery}}" wx:key="index">
+        <view class="kind-list__item">
+          <view id="{{item._id}}" class="weui-flex kind-list__item-hd">
+            <view class="weui-flex__item">{{item.name}}</view>
+            <image class="kind-list__img" src="../../images/home.png" style="width: 64px; height: 64px;"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
