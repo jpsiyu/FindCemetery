@@ -1,5 +1,5 @@
-const Authorize = require('./utils/authorize.js')
-const Dataholder = require('./utils/dataholder.js')
+const Authorize = require('./common/authorize.js')
+const Dataholder = require('./common/dataholder.js')
 
 App({
   userInfo: false,

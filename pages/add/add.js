@@ -7,27 +7,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitue: null,
+    longitude: null,
     latitude: null,
-    addrName: null,
+    lngLat: '',
+    addrName: '未设置',
     name: null,
   },
 
   chooseLocation: function () {
-    var fetch = this.data
-    var page = this
 
-    wx.chooseLocation({
-      
-      success: function (res) {
-        fetch.longitude = res.longitude
-        fetch.latitude = res.latitude
-        fetch.addrName = res.name
-        page.setData({
-          addrName: res.name
-        })
-      },
-    })
+    const successCallback = res => {
+      if(res.name) this.data.addrName = res.name
+      else if(res.address) this.data.addrName = res.address
+      else this.data.addrName = '所选位置未命名' 
+
+
+      this.data.longitude = res.longitude
+      this.data.latitude = res.latitude
+      this.data.lngLat = `(${res.longitude}, ${res.latitude})`
+
+      console.log(res, this.data)
+      this.setData(this.data )
+    }
+
+    wx.chooseLocation({success: successCallback})
   },
 
   /**
@@ -41,7 +44,7 @@ Page({
     const successCallback = (stone) => {
       console.log('add stone', stone)
       app.dataholder.addCemetery(stone)
-      wx.navigateBack({delta: 1})
+      wx.switchTab({url: '/pages/main/main'})
     }
 
     app.requestAddStone(

@@ -1,5 +1,5 @@
 // pages/main/main.js
-var util = require('../../utils/util.js')
+var util = require('../../common/util.js')
 var app = getApp()
 
 Page({
@@ -44,6 +44,7 @@ Page({
    */
   onShow: function () {
     var cemetery = app.dataholder.getCemetery()
+    if(!cemetery) cemetery = []
     this.setData({ gridHeight: this.calGridWidth() })
     this.setData({ cemetery: cemetery })
   },
