@@ -1,6 +1,5 @@
-// pages/main/main.js
-var util = require('../../lib/util.js')
-var app = getApp()
+// pages/modify/modify.js
+const app = getApp()
 
 Page({
 
@@ -8,44 +7,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cemetery: null,
-    cemeteryStatus: null,
-    pageHide: false,
-  },
-
-  updateView: function(){
-    if(this.data.pageHide) return
-    let cemetery = app.dataholder.getAllCemetery()
-    if(!cemetery) cemetery = []
-    this.setData({ cemetery: cemetery })
+    itemid: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.eventListener.addEvent('receStones', this, ()=>{this.updateView()})
+    this.setData({itemid: options.itemid})
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({pageHide: false})
-    this.updateView()
+    const cemetery = app.dataholder.getOneCemetery(this.data.itemid)
+    console.log('modify cemetery', cemetery)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.setData({pageHide: true})
+  
   },
 
   /**
