@@ -9,6 +9,7 @@ Page({
    */
   data: {
     cemetery: null,
+    cemeteryStatus: null,
     pageHide: false,
   },
 

@@ -1,14 +1,5 @@
-<!-- 
-<view class='page'>
-  <view class='cemetery-container'>
-    <view class='cemetery' wx:for="{{cemetery}}" wx:key="index" style='height:{{gridHeight}}px'>
-      {{item.name}}
-      {{item.locationName}}
-      {{item.location}}
-    </view>
-  </view>
-</view>
--->
+<import src="mainItem.wxml" />
+
 <view class="page">
   <view class="page__hd">
     <view class="page__title">前人居</view>
@@ -17,12 +8,8 @@
   <view class="page__bd page__bd_spacing">
     <view class="kind-list">
       <block wx:for="{{cemetery}}" wx:key="index">
-        <view class="kind-list__item">
-          <view id="{{item._id}}" class="weui-flex kind-list__item-hd">
-            <view class="weui-flex__item">{{item.name}}</view>
-            <image class="kind-list__img" src="../../images/home.png" style="width: 64px; height: 64px;"></image>
-          </view>
-        </view>
+        <template is="mainItem" data="{{item}}">
+      </template>
       </block>
     </view>
   </view>
